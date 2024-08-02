@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
-import { Box, TextField, Container, Typography, Stack } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Button, Box, TextField, Container, Typography, Stack, IconButton } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -68,9 +70,15 @@ function Customer() {
         <Container>
 
             <Box sx={{ width: '100%', margin: 'auto' }}>
-                <Stack direction="row" m={2} spacing={1} justifyContent='space-between'>
+                <Stack direction="row" m={1} spacing={1} justifyContent='space-between'>
+                    <Box>
+                        <IconButton variant="contained" component={Link} to="/home" color="info" size="medium">
+                            <ArrowBackIcon />
+                        </IconButton>
+                    </Box>
                     <Typography variant="h4">Valued Customer Finder</Typography>
                     <TextField
+                        sx={{ width: '30%' }}
                         id="txtSearch"
                         label="Search"
                         variant="outlined"
