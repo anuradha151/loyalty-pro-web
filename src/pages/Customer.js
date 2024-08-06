@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Button, Box, TextField, Container, Typography, Stack, IconButton } from "@mui/material";
+import { Box, TextField, Container, Typography, Stack, IconButton, Button } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -41,9 +41,9 @@ function Customer() {
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/customer/all")
+        axios.get("http://localhost:8080/customer?page=0&size=100")
             .then(response => {
-                setCustomers(response.data);
+                setCustomers(response.data.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -99,6 +99,7 @@ function Customer() {
                                 <StyledTableCell align="right">Mobile</StyledTableCell>
                                 <StyledTableCell align="right">Email</StyledTableCell>
                                 <StyledTableCell align="right">Address</StyledTableCell>
+                                <StyledTableCell align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         {customers.length > 0 &&
@@ -111,6 +112,12 @@ function Customer() {
                                         <StyledTableCell align="right">{row.mobile}</StyledTableCell>
                                         <StyledTableCell align="right">{row.email}</StyledTableCell>
                                         <StyledTableCell align="right">{row.address}</StyledTableCell>
+                                        <StyledTableCell align="right">
+                                            <Stack gap={1}  direction="row">                                            
+                                            <Button variant="contained" component={Link} to={`/customer-view/${row.uuid}`} >View</Button>
+                                            <Button variant="contained" color="success" component={Link} to={`/customer-edit/${row.uuid}`}>Edit</Button>
+                                            </Stack>
+                                        </StyledTableCell>
                                     </StyledTableRow>
                                 ))}
                             </TableBody>

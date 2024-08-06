@@ -14,6 +14,9 @@ import {
 
 import Home from './pages/Home';
 import Customer from './pages/Customer';
+import CustomerView from './pages/CustomerView';
+import CustomerEdit from './pages/CustomerEdit';
+
 
 function App() {
   return (
@@ -34,6 +37,14 @@ function App() {
                       path="*"
                       element={<Navigate to="/" />}
                   />
+                  <Route
+                        path="/customer-view/:uuid"
+                        element={<CustomerView />}
+                    />
+                     <Route
+                        path="/customer-edit/:uuid"
+                        element={<CustomerEdit />}
+                    />
               </Routes>
           </Router>
       </>
