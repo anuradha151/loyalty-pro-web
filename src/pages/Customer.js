@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Box, TextField, Container, Typography, Stack, IconButton, Button } from "@mui/material";
+import { Box, TextField, Container, Stack, Button } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -72,14 +71,8 @@ function Customer() {
     return (
         <Container>
 
-            <Box sx={{ width: '100%', margin: 'auto' }}>
-                <Stack direction="row" m={1} spacing={1} justifyContent='space-between'>
-                    <Box>
-                        <IconButton variant="contained" component={Link} to="/home" color="info" size="medium">
-                            <ArrowBackIcon />
-                        </IconButton>
-                    </Box>
-                    <Typography variant="h4">Valued Customer Finder</Typography>
+            <Box sx={{ width: '100%' }}>
+                <Stack direction="row" m={1} spacing={1} justifyContent='space-between'>                   
                     <TextField
                         sx={{ width: '30%' }}
                         id="txtSearch"
@@ -91,9 +84,8 @@ function Customer() {
                             handleSearch();
                         }}
                     />
+                    <Button variant="contained" component={Link} to="/customer-add" >Add Customer</Button>
                 </Stack>
-
-
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>

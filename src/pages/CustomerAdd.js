@@ -1,53 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Button, Stack, TextField, Typography, Snackbar, Alert, AlertTitle, Box, IconButton } from "@mui/material";
-
 import { useNavigate } from 'react-router-dom';
 
-const CustomerEdit = () => {
-
+function CustomerAdd() {
     const navigate = useNavigate();
-    const params = useParams();
     const [customer, setCustomer] = useState({
         name: '',
-        mobile: '',
         email: '',
+        mobile: '',
         address: ''
     });
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`http://localhost:8080/customer/${params.uuid}`);
-            setCustomer(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-    const handleUpdate = async () => {
-        try {
-            await axios.put(`http://localhost:8080/customer`, customer);
-            setOpen(true);            
-            setTimeout(() => {
-                setOpen(false);
-            }, 4000);
-            navigate('/customer');
-        } catch (error) {
-            console.error('Error updating data:', error.response.data.message);
-            setError(true);
-            setErrorMessage(error.response.data.message);
-            setTimeout(() => {
-                setError(false);
-                setErrorMessage('Error occured');
-            }, 5000);
-        }
-    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -57,13 +25,27 @@ const CustomerEdit = () => {
         }));
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleAdd = async () => {
+        try {
+            const response = await axios.post('http://localhost:8080/customer', customer, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response.status === 200) {
+                setOpen(true);
+                navigate('/customer');
+            }
+        } catch (error) {
+            setErrorMessage(error.response?.data?.message || 'An error occurred');
+            setError(true);
+        }
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const handleClose = () => {
+        setOpen(false);
+        setError(false);
+    };
 
     return (
         <Box mt={2} mx={4} display="flex" justifyContent="center">
@@ -76,7 +58,7 @@ const CustomerEdit = () => {
                             </IconButton>
                         </Box>
                         <Typography variant="h4" component="h1" gutterBottom>
-                            Customer Edit
+                            Customer Add
                         </Typography>
                     </Stack>
                     <TextField
@@ -112,11 +94,11 @@ const CustomerEdit = () => {
                         onChange={handleChange}
                     />
                     <Stack direction="row" justifyContent='right' spacing={2}>
-                        <Button sx={{ maxWidth: '100px' }} component={Link} to="/customer" variant="contained" color="error" >
+                        <Button  component={Link} to="/customer" variant="contained" color="error" >
                             Close
                         </Button>
-                        <Button variant="contained" color="primary" onClick={handleUpdate}>
-                            Update
+                        <Button variant="contained" color="primary" onClick={handleAdd}>
+                            Save
                         </Button>
                     </Stack>
                 </Stack>
@@ -132,7 +114,7 @@ const CustomerEdit = () => {
                         </Button>
                     }>
                         <AlertTitle>Success</AlertTitle>
-                        Customer details updated successfully.
+                        Customer crated successfully.
                     </Alert>
                 </Snackbar>
                 <Snackbar
@@ -153,6 +135,6 @@ const CustomerEdit = () => {
             </Box>
         </Box>
     );
-};
+}
 
-export default CustomerEdit;
+export default CustomerAdd;

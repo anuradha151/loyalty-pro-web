@@ -17,6 +17,7 @@ import CustomerView from './pages/CustomerView';
 import CustomerEdit from './pages/CustomerEdit';
 import { Container } from '@mui/material';
 import AppHeader from './components/AppHeader';
+import CustomerAdd from './pages/CustomerAdd';
 
 function App() {
     return (
@@ -30,12 +31,16 @@ function App() {
                         element={<Home />}
                     />
                     <Route
+                        path="*"
+                        element={<Navigate to="/" />}
+                    />
+                    <Route
                         path="/customer"
                         element={<Customer />}
                     />
-                    <Route
-                        path="*"
-                        element={<Navigate to="/" />}
+                     <Route
+                        path="/customer-add"
+                        element={<CustomerAdd />}
                     />
                     <Route
                         path="/customer-view/:uuid"
@@ -45,6 +50,7 @@ function App() {
                         path="/customer-edit/:uuid"
                         element={<CustomerEdit />}
                     />
+                     
                 </Routes>
             </Container>
         </>

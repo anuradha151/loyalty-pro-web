@@ -34,13 +34,19 @@ function AppHeader() {
           </IconButton>
           <Typography
             variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            component={NavLink}
+            to="/"
+            sx={{
+              color: 'white',
+              textDecoration: 'none',
+              flexGrow: 1,
+              display: { xs: 'none', sm: 'block' }
+            }}
           >
             Nethum Medi Lab
           </Typography>
           <List sx={{ display: 'flex' }}>
-            {links.map(({titlePage, link}) => (
+            {links.map(({ titlePage, link }) => (
               <ListItem
                 key={link}
                 component={NavLink}
