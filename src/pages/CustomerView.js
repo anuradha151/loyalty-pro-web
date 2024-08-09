@@ -32,7 +32,7 @@ const CustomerView = () => {
             <Stack spacing={2}>
                 <Stack direction="row" spacing={2}>
                     <Box>
-                        <IconButton variant="contained" component={Link} to="/" color="info" size="medium">
+                        <IconButton variant="contained" component={Link} to="/customer" color="info" size="medium">
                             <ArrowBackIcon />
                         </IconButton>
                     </Box>

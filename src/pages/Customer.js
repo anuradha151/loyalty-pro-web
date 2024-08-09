@@ -41,6 +41,10 @@ function Customer() {
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
+        findAllCustomers();
+    }, []);
+
+    function findAllCustomers(){
         axios.get("http://localhost:8080/customer?page=0&size=100")
             .then(response => {
                 setCustomers(response.data.data);
@@ -48,8 +52,7 @@ function Customer() {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
-
+    }
 
     function handleSearch() {
         try {
