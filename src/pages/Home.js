@@ -42,7 +42,7 @@ function Home() {
 
   return (
     <>
-      <Box 
+      <Box
         sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -103,6 +103,9 @@ function Home() {
               <CardContent>
                 <Typography variant="h6">{customer.name}</Typography>
                 <Typography variant="body2" color="textSecondary">
+                  Card Number: {customer.cardNumber}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
                   Email: {customer.email}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
@@ -147,6 +150,9 @@ function Home() {
                 </Typography>
               </Box>
               <Divider sx={{ mb: 2 }} />
+              <Typography id="customer-modal-description">
+                <strong>Card Number:</strong> {selectedCustomer.cardNumber}
+              </Typography>
               <Typography id="customer-modal-description" sx={{ mt: 2 }}>
                 <strong>Email:</strong> {selectedCustomer.email}
               </Typography>

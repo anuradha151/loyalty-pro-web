@@ -12,6 +12,7 @@ const CustomerEdit = () => {
     const navigate = useNavigate();
     const params = useParams();
     const [customer, setCustomer] = useState({
+        cardNumber: '',
         name: '',
         mobile: '',
         email: '',
@@ -79,6 +80,14 @@ const CustomerEdit = () => {
                             Customer Edit
                         </Typography>
                     </Stack>
+                    <TextField
+                        id="cardNumber"
+                        name="cardNumber"
+                        label="Card Number"
+                        variant="outlined"
+                        value={customer.cardNumber}
+                        onChange={handleChange}
+                    />
                     <TextField
                         id="name"
                         name="name"

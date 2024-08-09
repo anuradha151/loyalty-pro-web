@@ -43,7 +43,7 @@ function Customer() {
         findAllCustomers();
     }, []);
 
-    function findAllCustomers(){
+    function findAllCustomers() {
         axios.get("http://localhost:8080/customer?page=0&size=100")
             .then(response => {
                 setCustomers(response.data.data);
@@ -72,7 +72,7 @@ function Customer() {
         <Container>
 
             <Box sx={{ width: '100%' }}>
-                <Stack direction="row" m={1} spacing={1} justifyContent='space-between'>                   
+                <Stack direction="row" m={1} spacing={1} justifyContent='space-between'>
                     <TextField
                         sx={{ width: '30%' }}
                         id="txtSearch"
@@ -90,6 +90,7 @@ function Customer() {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
+                                <StyledTableCell>Card Number</StyledTableCell>
                                 <StyledTableCell>Full Name</StyledTableCell>
                                 <StyledTableCell align="right">Mobile</StyledTableCell>
                                 <StyledTableCell align="right">Email</StyledTableCell>
@@ -102,15 +103,18 @@ function Customer() {
                                 {customers.map((row) => (
                                     <StyledTableRow key={row.uuid}>
                                         <StyledTableCell component="th" scope="row">
+                                            {row.cardNumber}
+                                        </StyledTableCell>
+                                        <StyledTableCell component="th" scope="row">
                                             {row.name}
                                         </StyledTableCell>
                                         <StyledTableCell align="right">{row.mobile}</StyledTableCell>
                                         <StyledTableCell align="right">{row.email}</StyledTableCell>
                                         <StyledTableCell align="right">{row.address}</StyledTableCell>
                                         <StyledTableCell align="right">
-                                            <Stack gap={1}  direction="row">                                            
-                                            <Button variant="contained" component={Link} to={`/customer-view/${row.uuid}`} >View</Button>
-                                            <Button variant="contained" color="success" component={Link} to={`/customer-edit/${row.uuid}`}>Edit</Button>
+                                            <Stack gap={1} direction="row">
+                                                <Button variant="contained" component={Link} to={`/customer-view/${row.uuid}`} >View</Button>
+                                                <Button variant="contained" color="success" component={Link} to={`/customer-edit/${row.uuid}`}>Edit</Button>
                                             </Stack>
                                         </StyledTableCell>
                                     </StyledTableRow>

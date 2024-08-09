@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function CustomerAdd() {
     const navigate = useNavigate();
     const [customer, setCustomer] = useState({
+        cardNumber: '',
         name: '',
         email: '',
         mobile: '',
@@ -61,6 +62,14 @@ function CustomerAdd() {
                             Customer Add
                         </Typography>
                     </Stack>
+                    <TextField
+                        id="cardNumber"
+                        name="cardNumber"
+                        label="Card Number"
+                        variant="outlined"
+                        value={customer.cardNumber}
+                        onChange={handleChange}
+                    />
                     <TextField
                         id="name"
                         name="name"
